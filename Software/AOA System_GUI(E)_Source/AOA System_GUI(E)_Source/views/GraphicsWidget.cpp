@@ -25,7 +25,8 @@
 #include <QInputDialog>
 #include <QFile>
 #include <QPen>
-#include <QDesktopWidget>
+#include <QGuiApplication>
+#include <QScreen>
 #include <QComboBox>
 
 #define PEN_WIDTH (0.05)
@@ -36,9 +37,11 @@ GraphicsWidget::GraphicsWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::GraphicsWidget)
 {
-    QDesktopWidget desktop;
-    int desktopHeight=desktop.geometry().height();
-    int desktopWidth=desktop.geometry().width();
+    QScreen *screen = QGuiApplication::primaryScreen();
+    QRect screenGeometry = screen->geometry();
+
+    int desktopHeight=screenGeometry.height();
+    int desktopWidth=screenGeometry.width();
 
     ui->setupUi(this);
 
@@ -320,14 +323,17 @@ void GraphicsWidget::tagTableClicked(int r, int c)
 
         if(tag->joined)
         {
-            pItemC0->setTextColor(Qt::black);
+            pItemC0->setForeground(QBrush(Qt::black));
+
 
             pItem->setBackground(QBrush(QColor::fromHsvF(tag->colourH, tag->colourS, tag->colourV)));
         }
         else
         {
-            pItemC0->setTextColor(Qt::red);
-            pItem->setBackgroundColor(Qt::white);
+            pItemC0->setForeground(QBrush(Qt::red));
+
+            pItem->setBackground(QBrush(Qt::white));
+
             tag->showLabel = false;
             QTableWidgetItem *item = ui->tagTable->item(r, ColumnID);
             item->setCheckState(Qt::Unchecked);
@@ -559,7 +565,8 @@ void GraphicsWidget::insertTag(Tag *tag, int ridx, QString &t, bool showLabel)
             else
             {
                 pItem->setCheckState(Qt::Unchecked);
-                pItem->setBackgroundColor(Qt::white);
+                pItem->setBackground(QBrush(Qt::white));
+
             }
             pItem->setText(" ");
             pItem->setTextAlignment(Qt::AlignHCenter);
@@ -635,7 +642,9 @@ void GraphicsWidget::addNewNode(quint64 nodeId, bool show)
     node->colourS = 0.5;
     node->colourV = 0.98;
 
-    node->showLabel = (_nodeLabel != NULL) ? true : false;
+    node->showLabel = !_nodeLabel.isEmpty();
+
+
     node->nodeLabelStr = _nodeLabel;
 
     //node->pixmap = this->_scene->addPixmap(QPixmap(":/node.png"));
@@ -702,7 +711,9 @@ void GraphicsWidget::addNewTag(quint64 tagId, bool show)
     tag->fastrate = 1; //default rate is 10 Hz
     tag->joined = false ;
     tag->useIMU = false;
-    tag->showLabel = (taglabel != NULL) ? true : false;
+//    tag->showLabel = (taglabel != NULL) ? true : false;
+    tag->showLabel = !taglabel.isEmpty();
+
     tag->tagLabelStr = taglabel;
     //add text label and hide until we see if user has enabled showLabel
     {
@@ -917,10 +928,11 @@ void GraphicsWidget::tagPos(quint64 tagId, double x, double y, int mode)
                 pen.setStyle(Qt::SolidLine);
                 pen.setWidthF(PEN_WIDTH);
                 //set the brush colour of the labels
-                tag_pt->setBrush(b.color().dark());
-                tag->tagLabel->setBrush(b.color().dark());
+                tag_pt->setBrush(b.color().darker());
+
+                tag->tagLabel->setBrush(b.color().darker());
                 tag->tagLabel->setPen(pen);
-                tag->tagLabel2->setBrush(b.color().dark());
+                tag->tagLabel2->setBrush(b.color().darker());
                 tag->tagLabel2->setPen(pen);
             }
 
@@ -942,7 +954,8 @@ void GraphicsWidget::tagPos(quint64 tagId, double x, double y, int mode)
 
                 QTableWidgetItem *pItemC0 = ui->tagTable->item(ridx, ColumnID);
 
-                pItemC0->setTextColor(Qt::black); //black
+                pItemC0->setForeground(QBrush(Qt::black)); // black
+
 
             }
         }
@@ -1459,7 +1472,8 @@ void GraphicsWidget::timerUpdateTagTableExpire(void)
                             tagIDToString(tag->id, &t);
                             ridx = findTagRowIndex(t);
                             QTableWidgetItem *pItemC0 = ui->tagTable->item(ridx, ColumnID);
-                            pItemC0->setTextColor(Qt::darkRed); //darkRed
+                            pItemC0->setForeground(QBrush(Qt::darkRed)); // darkRed
+
                         }
 
                         if(tag->showLabel) //hide the labels once tag is gone

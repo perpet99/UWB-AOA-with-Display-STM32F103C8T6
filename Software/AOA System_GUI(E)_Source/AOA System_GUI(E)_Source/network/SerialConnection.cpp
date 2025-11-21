@@ -63,7 +63,8 @@ void SerialConnection::findSerialDevices()
     {
         //Their is some sorting to do for just list the port I want, with vendor Id & product Id
         qDebug() << port.portName() << port.vendorIdentifier() << port.productIdentifier()
-                 << port.hasProductIdentifier() << port.hasVendorIdentifier() << port.isBusy()
+                 << port.hasProductIdentifier() << port.hasVendorIdentifier()
+                 //<< port.isBusy()
                  << port.manufacturer() << port.description();
 
         if( (port.description() == DEVICE_STR_UART1) || (port.description() == DEVICE_STR_UART2)|| (port.description()== DEVICE_STR_USB) )
@@ -147,7 +148,9 @@ int SerialConnection::openConnection(int index)
     //open port from list
     x = _portInfo.at(index);
 
-    qDebug() << "port is busy? " << x.isBusy() << "index " << index << " = found " << foundit;
+    qDebug() << "port is busy? "
+             //<< x.isBusy()
+             << "index " << index << " = found " << foundit;
 
     //if(!open) return -1;
 

@@ -20,7 +20,7 @@
 #include "serial_widget.h"
 
 #include <QMetaProperty>
-#include <QDesktopWidget>
+#include <QScreen>
 
 /**
 * @brief RTLSDisplayApplication
@@ -33,9 +33,12 @@
 */
 RTLSDisplayApplication::RTLSDisplayApplication(int &argc, char **argv) : QApplication(argc, argv)
 {
-    QDesktopWidget desktop;
-    int desktopHeight=desktop.geometry().height();
-    int desktopWidth=desktop.geometry().width();
+    // QScreen  desktop;
+    QScreen *screen = QGuiApplication::primaryScreen();
+    QRect screenGeometry = screen->geometry();
+
+    int desktopHeight=screenGeometry.height();
+    int desktopWidth=screenGeometry.width();
 
     _ready = false;
 

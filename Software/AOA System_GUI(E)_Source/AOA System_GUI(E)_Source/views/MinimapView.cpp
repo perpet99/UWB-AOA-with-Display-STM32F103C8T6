@@ -95,6 +95,8 @@ void MinimapView::mouseMoveEvent(QMouseEvent *event)
 
 void MinimapView::wheelEvent(QWheelEvent *event)
 {
-    qreal s = pow((double)2, event->delta() / 360.0);
+    //qreal s = pow((double)2, event->delta() / 360.0);
+    qreal s = pow((double)2, event->angleDelta().y() / 360.0);
+
     RTLSDisplayApplication::graphicsView()->scaleView(s, s);
 }

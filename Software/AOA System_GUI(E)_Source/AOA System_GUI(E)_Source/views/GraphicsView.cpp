@@ -270,8 +270,10 @@ void GraphicsView::contextMenuEvent(QContextMenuEvent *event)
 
 void GraphicsView::wheelEvent(QWheelEvent *event)
 {
-    qreal s = 2 - qPow((double)2, event->delta() / 360.0);
-    scaleView(s, s, mapToScene(event->pos()));
+    qreal s = 2 - qPow((double)2, event->angleDelta().y() / 360.0);
+
+    scaleView(s, s, mapToScene(event->position().toPoint()));
+
 }
 
 void GraphicsView::showEvent(QShowEvent *event)

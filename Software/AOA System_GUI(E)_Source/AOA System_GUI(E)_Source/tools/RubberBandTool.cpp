@@ -69,13 +69,19 @@ void RubberBandTool::mouseMoveEvent(const QPointF &scenePos)
     QRectF area = QRectF(_start, scenePos).normalized();
     QGraphicsScene *scene = RTLSDisplayApplication::graphicsView()->scene();
 
-    QSet<QGraphicsItem *> newItems = scene->items(area).toSet();
+    //QSet<QGraphicsItem *> newItems = scene->items(area).toSet();
+    //QSet<QGraphicsItem *> newItems = QSet<QGraphicsItem *>::fromList(scene->items(area));
+    QSet<QGraphicsItem *> newItems = QSet<QGraphicsItem *>(scene->items(area).begin(), scene->items(area).end());
+
     QSet<QGraphicsItem *> oldItems = _previousItems;
 
     oldItems -= newItems;
     newItems -= _previousItems;
 
-    _previousItems = scene->items(area).toSet();
+    _previousItems = QSet<QGraphicsItem *>(scene->items(area).begin(), scene->items(area).end());
+
+    // QSet<QGraphicsItem *> newItems = QSet<QGraphicsItem *>::fromList(scene->items(area));
+
 }
 
 void RubberBandTool::mouseReleaseEvent(const QPointF &scenePos)

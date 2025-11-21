@@ -220,7 +220,7 @@ int check_json_stream(const QByteArray st)
 
     if(tagDeleted.size()>0)
     {
-        qDebug() << QString('Node response: TagDeleted\r\n');
+        qDebug() << "Node response: TagDeleted\r\n";
     }
 
     if(tagAdded.size()>0)
