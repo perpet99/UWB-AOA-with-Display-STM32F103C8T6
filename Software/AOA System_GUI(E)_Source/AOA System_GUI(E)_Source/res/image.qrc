@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/logo"/>
+    <qresource prefix="/">
+        <file>JL.ico</file>
+    </qresource>
+</RCC>

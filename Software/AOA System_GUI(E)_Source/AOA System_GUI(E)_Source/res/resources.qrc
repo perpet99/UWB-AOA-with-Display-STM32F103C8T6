@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>node.png</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>DWctrler.ico</file>
+    </qresource>
+</RCC>
