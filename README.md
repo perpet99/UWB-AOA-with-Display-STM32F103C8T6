@@ -62,6 +62,14 @@ UWB AOA with Display STM32F103C8T6
 5. Result Show:  
 ![](Images/AOA_System01.jpg)
 
+# gui build
+
+1. install qt creator
+2. install qt serialport
+3. build
+
+# Firmware build
+
 
 # Firmware
 
@@ -100,6 +108,7 @@ UWB AOA with Display STM32F103C8T6
 
 # Where to purchase? 
 [AOA KIT](https://www.makerfabs.com/mauwb-stm32-aoa-development-kit.html) 
+
 
 
 
