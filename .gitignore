@@ -1,0 +1,52 @@
+# ===== 빌드 산출물 (Build artifacts) =====
+
+# 컴파일 중간 파일
+*.o
+*.obj
+*.d
+*.su
+*.cyclo
+*.lst
+*.i
+*.ii
+
+# CubeIDE Debug / Release 링크 결과물
+**/Debug/*.elf
+**/Debug/*.map
+**/Debug/*.list
+**/Debug/*.hex
+**/Debug/*.bin
+**/Debug/objects.list
+**/Release/*.elf
+**/Release/*.map
+**/Release/*.list
+**/Release/*.hex
+**/Release/*.bin
+**/Release/objects.list
+
+# Keil MDK 빌드 산출물
+*.axf
+*.crf
+*.dep
+*.o.d
+*.build_log.htm
+*.htm
+*.bak
+*.sct
+*.scvd
+*.uvguix.*
+*.uvoptx
+DebugConfig/
+Listings/
+Objects/
+
+# ===== IDE / OS 잡파일 =====
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# ===== 예외 (배포용 결과물은 계속 추적) =====
+!Firmware/keil/HexFiles/*.hex
+!Firmware/stm32cube/HexFiles/*.hex
+!**/Core/Src/*.a
