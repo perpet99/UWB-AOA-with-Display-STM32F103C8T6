@@ -62,6 +62,14 @@ UWB AOA with Display STM32F103C8T6
 5. Result Show:  
 ![](Images/AOA_System01.jpg)
 
+# gui build
+
+1. install qt creator
+2. install qt serialport
+3. build
+
+# Firmware build
+
 
 # Firmware
 
@@ -109,4 +117,5 @@ You can list your question here or contact techsupport@makerfabs.com for technol
 • Q:The AOA kit has multiple tag bindings, resulting in the inability to obtain distance and angle information.
 
 • A:One AOA device only supports one anchor point paired with one tag to work simultaneously. Excess tags will cause the data not to be displayed. Please unbind the phantom false tags in the interface, and the kit can be used normally.
+
 
